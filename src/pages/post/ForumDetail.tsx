@@ -58,7 +58,6 @@ export default function ForumDetail() {
 
     const fetchComments = async () => {
         try {
-            const token = localStorage.getItem('access_token');
             await apiClient.get(`/posts/${id}/comments`);
             const data = response.data.data || response.data || [];
 
@@ -81,7 +80,6 @@ export default function ForumDetail() {
     useEffect(() => {
         const fetchPostDetail = async () => {
             try {
-                const token = localStorage.getItem('access_token');
                 await apiClient.get(`/posts/${id}`);
                 const data = response.data.data || response.data;
 
@@ -116,7 +114,7 @@ export default function ForumDetail() {
             const token = localStorage.getItem('access_token');
             if (token) {
                 try {
-                    await apiClient.get('/users/me');
+                    const response = await apiClient.get('/users/me');
                     const data = response.data.data || response.data;
                     setUserName(data.nickname || data.name || '익명');
                 } catch (error) {
@@ -144,7 +142,6 @@ export default function ForumDetail() {
     const handleDeletePost = async () => {
         if (window.confirm('정말 이 포럼 게시글을 삭제하시겠습니까? (댓글도 함께 사라집니다)')) {
             try {
-                const token = localStorage.getItem('access_token');
                 await apiClient.delete(`/posts/${id}`);
 
                 alert('게시글이 삭제되었습니다.');
@@ -162,7 +159,6 @@ export default function ForumDetail() {
         }
 
         try {
-            const token = localStorage.getItem('access_token');
             const requestData = {
                 title: editPostTitle,
                 content: editPostContent,
@@ -187,7 +183,6 @@ export default function ForumDetail() {
         if (!newComment.trim()) return alert('댓글 내용을 입력해주세요.');
 
         try {
-            const token = localStorage.getItem('access_token');
             await apiClient.post(`/posts/${id}/comments`, { content: newComment });
 
             setNewComment('');
@@ -201,7 +196,6 @@ export default function ForumDetail() {
     const handleDeleteComment = async (commentId: number) => {
         if (window.confirm('정말 삭제하시겠습니까?')) {
             try {
-                const token = localStorage.getItem('access_token');
                 await apiClient.delete(`/posts/${id}/comments/${commentId}`);
                 fetchComments();
             } catch (error) {
@@ -219,7 +213,6 @@ export default function ForumDetail() {
     const handleEditSave = async (commentId: number) => {
         if (!editCommentText.trim()) return alert('내용을 입력해주세요.');
         try {
-            const token = localStorage.getItem('access_token');
             await apiClient.put(`/posts/${id}/comments/${commentId}`, {
                 content: editCommentText,
             });
@@ -234,7 +227,6 @@ export default function ForumDetail() {
     const handleCommentLike = async (comment: CommentType) => {
         if (!isLoggedIn) return alert('로그인 후 이용 가능합니다.');
         try {
-            const token = localStorage.getItem('access_token');
 
             if (comment.isLiked) {
                 await apiClient.delete(`/posts/${id}/comments/${comment.id}/like`);
@@ -254,7 +246,6 @@ export default function ForumDetail() {
     const handlePostLike = async () => {
         if (!isLoggedIn) return alert('로그인 후 이용 가능합니다.');
         try {
-            const token = localStorage.getItem('access_token');
             if (postLike.isLiked) {
                 await apiClient.delete(`/posts/${id}/like`);
             } else {

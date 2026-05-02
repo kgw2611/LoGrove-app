@@ -1,7 +1,9 @@
 import axios, { type InternalAxiosRequestConfig } from 'axios';
 
+export const API_BASE_URL = 'http://3.38.12.226:8080';
+
 export const apiClient = axios.create({
-    baseURL: 'http://3.38.12.226:8080/api'
+    baseURL: `${API_BASE_URL}/api`,
 });
 
 apiClient.interceptors.request.use(
