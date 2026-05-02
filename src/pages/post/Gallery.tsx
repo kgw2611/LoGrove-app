@@ -20,7 +20,7 @@ import {
     type GalleryDetailItem,
     type GalleryListItem,
 } from '../../shared/api/gallery';
-import axios from "axios";
+import { apiClient } from '../../shared/api/client';
 
 function SearchIcon() {
     return (
@@ -254,9 +254,7 @@ export default function Gallery() {
             const token = localStorage.getItem('access_token');
             if (token) {
                 try {
-                    const response = await axios.get('/api/users/me', {
-                        headers: { 'Authorization': `Bearer ${token}` }
-                    });
+                    const response = await apiClient.get('/users/me');
                     const data = response.data.data || response.data;
                     setUserName(data.nickname || data.name || '익명');
                 } catch (error) {

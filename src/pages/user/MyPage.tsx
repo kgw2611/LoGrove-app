@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, type ChangeEvent, type MouseEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { apiClient } from '../../shared/api/client';
 import './MyPage.css';
 import {
     getMyGalleryPosts,
@@ -123,9 +123,7 @@ export default function MyPage() {
             if (!token) return;
 
             try {
-                const response = await axios.get('/api/users/me', {
-                    headers: { Authorization: `Bearer ${token}` },
-                });
+                const response = await apiClient.get('/users/me');
 
                 const data = response.data.data || response.data;
 
@@ -161,9 +159,7 @@ export default function MyPage() {
 
             // --- 내가 쓴 글 가져오기 ---
             try {
-                const postsRes = await axios.get('/api/users/me/myposts', {
-                    headers: { Authorization: `Bearer ${token}` },
-                });
+                const postsRes = await apiClient.get('/users/me/myposts');
 
                 const postsData: RawMyActivity[] =
                     postsRes.data.data || postsRes.data?.content || [];
@@ -208,9 +204,7 @@ export default function MyPage() {
 
             // --- 내가 쓴 댓글 가져오기 ---
             try {
-                const commentsRes = await axios.get('/api/users/me/mycomments', {
-                    headers: { Authorization: `Bearer ${token}` },
-                });
+                const commentsRes = await apiClient.get('/users/me/mycomments');
 
                 const commentsData: RawMyActivity[] =
                     commentsRes.data.data || commentsRes.data?.content || [];
@@ -275,10 +269,7 @@ export default function MyPage() {
         formData.append('image', file);
 
         try {
-            const token = localStorage.getItem('access_token');
-            const response = await axios.put('/api/users/me/profile-image', formData, {
-                headers: { Authorization: `Bearer ${token}` },
-            });
+            const response = await apiClient.put('/users/me/profile-image', formData);
             const data = response.data.data || response.data;
             setProfileImageUrl(data.profileUrl || '');
         } catch (error) {
@@ -290,13 +281,8 @@ export default function MyPage() {
     // 4. 한줄소개 저장
     const handleSaveBio = async () => {
         try {
-            const token = localStorage.getItem('access_token');
 
-            await axios.put(
-                '/api/users/me',
-                { bio },
-                { headers: { Authorization: `Bearer ${token}` } }
-            );
+            await apiClient.put('/users/me', { bio });
 
             const savedUser: UserDataType = { ...userData, bio };
             setUserData(savedUser);
@@ -332,13 +318,7 @@ export default function MyPage() {
         }
 
         try {
-            const token = localStorage.getItem('access_token');
-
-            await axios.put(
-                '/api/users/me',
-                { nickname: editNickname },
-                { headers: { Authorization: `Bearer ${token}` } }
-            );
+            await apiClient.put('/users/me', { nickname: editNickname });
 
             const updatedUser: UserDataType = {
                 ...userData,

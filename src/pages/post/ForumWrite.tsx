@@ -1,6 +1,6 @@
 import { useState, useRef, type ChangeEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios'; // 🔥 백엔드 통신용 axios
+import { apiClient } from '../../shared/api/client';
 import '../home/Home.css';
 import './CommunityWrite.css';
 
@@ -97,11 +97,10 @@ export default function ForumWrite() {
                 return;
             }
 
-            const response = await axios.post('/api/posts', formData, {
+            const response = await apiClient.post('/posts', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
-                    'Authorization': `Bearer ${token}`
-                }
+                },
             });
 
             if (response.status === 200 || response.status === 201) {
