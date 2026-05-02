@@ -119,6 +119,7 @@ export default function MyPage() {
     // 1. 백엔드에서 내 정보 가져오기
     useEffect(() => {
         const fetchMyInfo = async () => {
+            const token = localStorage.getItem('access_token');
             if (!token) return;
 
             try {
@@ -268,7 +269,6 @@ export default function MyPage() {
         formData.append('image', file);
 
         try {
-            const token = localStorage.getItem('access_token');
             const response = await apiClient.put('/users/me/profile-image', formData);
             const data = response.data.data || response.data;
             setProfileImageUrl(data.profileUrl || '');
@@ -281,7 +281,6 @@ export default function MyPage() {
     // 4. 한줄소개 저장
     const handleSaveBio = async () => {
         try {
-            const token = localStorage.getItem('access_token');
 
             await apiClient.put('/users/me', { bio });
 
@@ -319,8 +318,6 @@ export default function MyPage() {
         }
 
         try {
-            const token = localStorage.getItem('access_token');
-
             await apiClient.put('/users/me', { nickname: editNickname });
 
             const updatedUser: UserDataType = {

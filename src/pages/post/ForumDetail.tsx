@@ -58,7 +58,7 @@ export default function ForumDetail() {
 
     const fetchComments = async () => {
         try {
-            await apiClient.get(`/posts/${id}/comments`);
+            const response = await apiClient.get(`/posts/${id}/comments`);
             const data = response.data.data || response.data || [];
 
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -80,7 +80,7 @@ export default function ForumDetail() {
     useEffect(() => {
         const fetchPostDetail = async () => {
             try {
-                await apiClient.get(`/posts/${id}`);
+                const response = await apiClient.get(`/posts/${id}`);
                 const data = response.data.data || response.data;
 
                 const formattedPost: ForumPostType = {
