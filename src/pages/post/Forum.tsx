@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { apiClient } from '../../shared/api/client';
 import '../home/Home.css';
 import './Community.css';
 import './Forum.css';
@@ -50,9 +50,7 @@ export default function Forum() {
             const token = localStorage.getItem('access_token');
             if (token) {
                 try {
-                    const response = await axios.get('/api/users/me', {
-                        headers: { 'Authorization': `Bearer ${token}` }
-                    });
+                    const response = await apiClient.get('/users/me');
                     const data = response.data.data || response.data;
                     setUserName(data.nickname || data.name || '익명');
                 } catch (error) {
@@ -87,7 +85,11 @@ export default function Forum() {
         const fetchPopularSidebar = async () => {
             try {
                 // 커뮤니티와 동일하게 인기글 API 호출, 단 board 파라미터를 FORUM으로!
-                const response = await axios.get('/api/posts/popular?board=FORUM');
+                const response = await apiClient.get('/posts/popular', {
+                    params: {
+                        board: 'FORUM',
+                    },
+                });
                 const postsData: ForumPostType[] = (response.data.data || []).slice(0, 5).map(formatPost);
                 setPopularSidebar(postsData);
             } catch (error) {
@@ -100,7 +102,12 @@ export default function Forum() {
     useEffect(() => {
         const fetchPopularSidebar = async () => {
             try {
-                const response = await axios.get('/api/posts/popular?board=FORUM&days=7');
+                const response = await apiClient.get('/posts/popular', {
+                    params: {
+                        board: 'FORUM',
+                        days: 7,
+                    },
+                });
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 const posts: ForumPostType[] = (response.data.data || []).slice(0, 5).map((post: any) => ({
                     id: post.id || post.postId,
@@ -123,7 +130,13 @@ export default function Forum() {
     useEffect(() => {
         const fetchForumPosts = async () => {
             try {
-                const response = await axios.get(`/api/posts?board=FORUM&page=${currentPage}&size=15`);
+                const response = await apiClient.get('/posts', {
+                    params: {
+                        board: 'FORUM',
+                        page: currentPage,
+                        size: 15,
+                    },
+                });
 
                 const pageData = response.data.data;
                 const postsData = pageData?.content || response.data.content || response.data.data || [];

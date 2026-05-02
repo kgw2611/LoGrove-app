@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import axios from 'axios'
+import { apiClient } from '../../shared/api/client'
 import '../home/Home.css'
 import './Community.css'
 import Pagination from '../../shared/ui/Pagination'
@@ -59,9 +59,7 @@ export default function Community() {
             const token = localStorage.getItem('access_token');
             if (token) {
                 try {
-                    const response = await axios.get('/api/users/me', {
-                        headers: { 'Authorization': `Bearer ${token}` }
-                    });
+                    const response = await apiClient.get('/users/me');
                     const data = response.data.data || response.data;
                     setUserName(data.nickname || data.name || '익명');
                 } catch (error) {
@@ -92,7 +90,12 @@ export default function Community() {
     useEffect(() => {
         const fetchPopularSidebar = async () => {
             try {
-                const response = await axios.get('/api/posts/popular?board=COMMUNITY&days=7');
+                const response = await apiClient.get('/posts/popular', {
+                    params: {
+                        board: 'COMMUNITY',
+                        days: 7,
+                    },
+                });
                 const postsData: Board[] = (response.data.data || []).slice(0, 5).map(formatPost);
                 setPopularSidebar(postsData);
             } catch (error) {
@@ -107,7 +110,11 @@ export default function Community() {
         const fetchPosts = async () => {
             try {
                 if (activeTag === '인기순위') {
-                    const response = await axios.get('/api/posts/popular?board=COMMUNITY');
+                    const response = await apiClient.get('/posts/popular', {
+                        params: {
+                            board: 'COMMUNITY',
+                        },
+                    });
                     const postsData: Board[] = (response.data.data || []).map(formatPost);
                     setBoardList(postsData);
                     setTotalPages(0);
@@ -115,11 +122,15 @@ export default function Community() {
                 }
 
                 const tagId = categoryToTagId[activeTag];
-                const url = tagId
-                    ? `/api/posts?board=COMMUNITY&tagIds=${tagId}&page=${currentPage}&size=15`
-                    : `/api/posts?board=COMMUNITY&page=${currentPage}&size=15`;
 
-                const response = await axios.get(url);
+                const response = await apiClient.get('/posts', {
+                    params: {
+                        board: 'COMMUNITY',
+                        page: currentPage,
+                        size: 15,
+                        ...(tagId ? { tagIds: tagId } : {}),
+                    },
+                });
                 const pageData = response.data.data;
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 const postsData: Board[] = (pageData?.content || []).map((post: any) => formatPost(post));

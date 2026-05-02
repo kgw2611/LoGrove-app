@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { apiClient } from './client';
+import { apiClient, API_BASE_URL } from './client';
 
 export const EXCLUDED_GALLERY_TAG_NAMES = [
     'canon',
@@ -214,7 +214,8 @@ function extractTagNames(rawTags?: string[] | RawTag[]): string[] {
 
 function normalizeImageUrl(raw?: string) {
     if (!raw) return 'https://via.placeholder.com/400x500?text=No+Image';
-    return raw;
+    if (raw.startsWith('http')) return raw;
+    return `${API_BASE_URL}${raw.startsWith('/') ? raw : `/${raw}`}`;
 }
 
 function normalizeComment(raw: RawComment, fallbackPostId?: number): CommentItem {
