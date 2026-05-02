@@ -1,7 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
-    <string name="app_name">Logrove</string>
-    <string name="title_activity_main">Logrove</string>
-    <string name="package_name">com.hansung.logrove</string>
-    <string name="custom_url_scheme">com.hansung.logrove</string>
-</resources>
