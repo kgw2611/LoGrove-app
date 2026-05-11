@@ -323,3 +323,188 @@ input:checked + .slider:before {
 .slider.round:before {
     border-radius: 50%;
 }
+
+/* =============================================
+   📱 모바일 반응형 (갤럭시 S22 기준: 360px)
+   ============================================= */
+@media (max-width: 768px) {
+ 
+    /* 🔑 overflow 방지 */
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+    }
+ 
+    /* 컨테이너: 좌우 패딩 제거 → 네비바와 너비 일치 */
+    .write-container {
+        padding: 0 0 40px;
+        overflow-x: hidden;
+        width: 100%;
+    }
+ 
+    /* 헤더: 좌우 패딩을 직접 부여 */
+    .write-header-bar {
+        padding: 12px 16px;
+        margin-bottom: 0;
+    }
+ 
+    .write-header-title {
+        font-size: 15px;
+        font-weight: 600;
+    }
+ 
+    .back-btn {
+        font-size: 18px;
+    }
+ 
+    .write-header-left {
+        gap: 8px;
+    }
+ 
+    .write-header-right {
+        gap: 10px;
+    }
+ 
+    .temp-save {
+        font-size: 12px;
+    }
+ 
+    .submit-post-btn {
+        padding: 6px 14px;
+        font-size: 13px;
+        border-radius: 16px;
+    }
+ 
+    /* 2단 → 1단 세로 배치 */
+    .write-content {
+        flex-direction: column;
+        gap: 0;
+        width: 100%;
+        padding: 16px 16px 0;
+    }
+ 
+    /* 에디터 상단 (게시판 선택 + 제목) */
+    .editor-top {
+        padding: 12px;
+        gap: 10px;
+        margin-bottom: 0;
+        border-radius: 8px 8px 0 0;
+        border-bottom: none;
+        width: 100%;
+    }
+ 
+    .board-select {
+        font-size: 13px;
+        width: 100%;
+    }
+ 
+    .title-input {
+        padding: 10px 12px;
+        font-size: 14px;
+        width: 100%;
+    }
+ 
+    /* 툴바: 고정 배치 (스크롤 없음) */
+    .editor-toolbar {
+        border-radius: 0;
+        width: 100%;
+    }
+ 
+    .toolbar-icons {
+        display: flex;
+        justify-content: space-between; /* 균등 배치 */
+        gap: 0;
+        padding: 8px 10px;
+        overflow-x: hidden; /* 스크롤 차단 */
+        white-space: nowrap;
+        flex-wrap: nowrap;
+    }
+ 
+    .toolbar-icons button {
+        font-size: 11px;
+        flex: 1; /* 균등 너비 */
+        white-space: nowrap;
+        padding: 0 2px;
+        text-align: center;
+    }
+ 
+    /* 텍스트 옵션 행도 고정 */
+    .toolbar-text-options {
+        display: flex;
+        justify-content: space-between;
+        gap: 0;
+        padding: 6px 10px;
+        overflow-x: hidden;
+        flex-wrap: nowrap;
+    }
+ 
+    .toolbar-text-options::-webkit-scrollbar {
+        display: none;
+    }
+ 
+    .toolbar-text-options select,
+    .toolbar-text-options button {
+        font-size: 12px;
+        flex-shrink: 0;
+    }
+ 
+    /* 본문 textarea */
+    .content-textarea {
+        height: 240px;
+        padding: 12px;
+        font-size: 14px;
+        width: 100%;
+    }
+ 
+    /* 사이드바: 본문 아래 세로 배치 */
+    .write-sidebar {
+        flex: none;
+        width: 100%;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 16px;
+    }
+ 
+    /* 각 박스 full-width */
+    .gray-box {
+        width: 100%;
+        padding: 16px;
+        border-radius: 8px;
+    }
+ 
+    .setting-title {
+        font-size: 13px;
+        margin-bottom: 12px;
+    }
+ 
+    .setting-list label {
+        font-size: 13px;
+    }
+ 
+    .toggle-label {
+        font-size: 13px;
+    }
+ 
+    .toggle-row {
+        margin-bottom: 12px;
+    }
+ 
+    /* 토글 스위치 크기 살짝 축소 */
+    .switch {
+        width: 38px;
+        height: 20px;
+        flex-shrink: 0;
+    }
+ 
+    .slider:before {
+        height: 14px;
+        width: 14px;
+        left: 3px;
+        bottom: 3px;
+    }
+ 
+    input:checked + .slider:before {
+        transform: translateX(18px);
+    }
+}
