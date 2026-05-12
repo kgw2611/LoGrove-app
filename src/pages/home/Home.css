@@ -87,6 +87,11 @@
     overflow-x: auto;
     overflow-y: hidden;
     margin-top: -220px;
+    scrollbar-width: none;
+}
+
+.features-section::-webkit-scrollbar {
+    display: none;
 }
 
 .cards-container {
@@ -95,14 +100,16 @@
     align-items: center;
     gap: 16px;
     margin-top: 0;
-    padding: 0 8px;
+    padding: 0 80px;
     width: max-content;
 }
 
+/* 모든 카드 동일한 크기 */
 .feature-card {
     width: 200px;
     min-width: 200px;
-    min-height: 240px;
+    height: 320px;
+    min-height: 260px;
     border-radius: 20px;
     padding: 24px 16px;
     text-align: center;
@@ -176,10 +183,9 @@
     background-color: #FFF3E5; 
 }
 
+/* card-green: 크기 관련 별도 스타일 제거 → .feature-card와 동일 */
 .card-green {
     background-color: #D4F0DF;
-    min-height: 260px;
-    padding-top: 28px;
     box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
     border: 3px solid #bce6cc;
 }
