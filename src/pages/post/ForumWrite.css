@@ -1,0 +1,17 @@
+/* =============================================
+   📱 ForumWrite 모바일 전용
+   (갤럭시 S22 기준: 360px)
+   ============================================= */
+@media (max-width: 768px) {
+
+    /* 셀렉트 두 개(게시판/카메라) 가로 → 세로 배치 */
+    .editor-top > div {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .editor-top > div .board-select {
+        font-size: 12px;
+        width: 100%;
+    }
+}

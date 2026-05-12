@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { apiClient } from '../../shared/api/client';
 import '../home/Home.css';
 import './CommunityWrite.css';
+import './ForumWrite.css';
 
 interface Toggles {
     comment: boolean;
