@@ -1,3 +1,8 @@
+/* ===========================
+   StudyStep.css — 갤럭시 S22 모바일 최적화
+   기준: 360px × 780px
+   =========================== */
+
 .step-container {
     font-family: 'Pretendard', -apple-system, sans-serif;
     background-color: #ffffff;
@@ -9,94 +14,95 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 16px 40px;
+    padding: 12px 16px;
     border-bottom: 1px solid #eaeaea;
 }
 
 .step-nav-left {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 12px;
 }
 
 .back-arrow-btn {
     background: none;
     border: none;
-    font-size: 24px;
+    font-size: 20px;
     cursor: pointer;
     color: #333;
 }
 
 .nav-divider {
     width: 1px;
-    height: 24px;
+    height: 20px;
     background-color: #e0e0e0;
 }
 
 .logo-text {
-    font-size: 24px;
+    font-size: 18px;
     font-weight: 700;
     color: #87d8a3;
-    margin-right: 10px;
+    margin-right: 6px;
 }
 
 .step-nav-title {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 600;
-    color: #87d8a3; /* 로고와 같은 초록색 계열 */
+    color: #87d8a3;
 }
 
 .step-nav-right {
     display: flex;
-    gap: 12px;
+    gap: 8px;
 }
 
 .login-btn {
-    padding: 8px 16px;
+    padding: 6px 12px;
     border-radius: 20px;
     border: 1px solid #ddd;
     background: white;
     cursor: pointer;
+    font-size: 13px;
 }
 
 .start-btn {
-    padding: 8px 16px;
+    padding: 6px 12px;
     border-radius: 20px;
     border: none;
     background-color: #87d8a3;
     color: white;
     font-weight: bold;
     cursor: pointer;
+    font-size: 13px;
 }
 
 /* --- 메인 콘텐츠 영역 --- */
 .step-main-content {
     display: flex;
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 40px 20px;
-    gap: 40px;
+    flex-direction: column; /* 세로 스택 */
+    padding: 20px 16px;
+    gap: 0;
+    box-sizing: border-box;
 }
 
-/* 왼쪽 사이드바 (도형 & 세로선) */
+/* 사이드바: 모바일에서 완전히 숨김 */
 .step-sidebar {
-    width: 150px;
-    border-right: 2px solid #87d8a3; /* 초록색 세로선! */
-    position: relative;
+    display: none;
 }
 
 .graphics-placeholder {
     width: 100%;
-    height: 100%;
-    /* 나중에 이미지를 넣을 곳입니다 */
+    min-height: 0;
 }
 
-/* 오른쪽 리스트 영역 */
+/* 리스트 영역: 상단에 깔끔한 초록 포인트 선 */
 .step-list-section {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 14px;
+    border-top: 3px solid #87d8a3;
+    padding-top: 20px;
 }
 
 /* --- 카드 디자인 --- */
@@ -104,56 +110,66 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 24px 30px;
+    padding: 16px 18px;
     border-radius: 8px;
     background-color: #ffffff;
+    gap: 12px;
+}
+
+.step-card-info {
+    flex: 1;
+    min-width: 0; /* 텍스트 overflow 방지 */
 }
 
 .step-card-title {
-    font-size: 18px;
+    font-size: 15px;
     font-weight: 700;
-    margin: 0 0 8px 0;
+    margin: 0 0 6px 0;
     color: #333;
 }
 
 .step-card-desc {
-    font-size: 14px;
+    font-size: 13px;
     color: #666;
-    margin: 0 0 12px 0;
+    margin: 0 0 8px 0;
+    word-break: keep-all;
 }
 
 .step-card-level {
     display: flex;
     align-items: center;
-    font-size: 12px;
+    font-size: 11px;
     color: #666;
 }
 
 .level-dot {
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
-    margin-right: 6px;
+    margin-right: 5px;
+    flex-shrink: 0;
 }
 
 .step-action-btn {
-    padding: 10px 28px;
+    padding: 8px 18px;
     border-radius: 20px;
     border: none;
     color: white;
     font-weight: 600;
-    font-size: 14px;
+    font-size: 13px;
     cursor: pointer;
     transition: opacity 0.2s;
+    flex-shrink: 0; /* 버튼이 찌그러지지 않게 */
+    white-space: nowrap;
 }
 
 .step-action-btn:hover {
     opacity: 0.8;
 }
 
-/* 🔥 상태별 컬러 테마 (초록색: 시작 / 보라색: 완료) */
+/* 상태별 컬러 테마 */
 .card-start {
-    border: 2px solid #8fd3b2; /* 연한 초록색 테두리 */
+    border: 2px solid #8fd3b2;
 }
 .btn-start {
     background-color: #8fd3b2;
@@ -163,11 +179,93 @@
 }
 
 .card-done {
-    border: 2px solid #b8a1f8; /* 연한 보라색 테두리 */
+    border: 2px solid #b8a1f8;
 }
 .btn-done {
     background-color: #b8a1f8;
 }
 .dot-done {
     background-color: #b8a1f8;
+}
+
+
+/* ===========================
+   데스크탑 원본 레이아웃 복원
+   (768px 이상에서 기존 디자인 유지)
+   =========================== */
+@media (min-width: 768px) {
+    .step-navbar {
+        padding: 16px 40px;
+    }
+
+    .back-arrow-btn {
+        font-size: 24px;
+    }
+
+    .logo-text {
+        font-size: 24px;
+        margin-right: 10px;
+    }
+
+    .step-nav-title {
+        font-size: 16px;
+    }
+
+    .login-btn,
+    .start-btn {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+
+    .step-main-content {
+        flex-direction: row;
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 40px 20px;
+        gap: 40px;
+    }
+
+    .step-sidebar {
+        width: 150px;
+        border-right: 2px solid #87d8a3;
+        border-bottom: none;
+        margin-bottom: 0;
+    }
+
+    .graphics-placeholder {
+        height: 100%;
+    }
+
+    .step-list-section {
+        gap: 20px;
+    }
+
+    .step-card {
+        padding: 24px 30px;
+        gap: 0;
+    }
+
+    .step-card-title {
+        font-size: 18px;
+        margin-bottom: 8px;
+    }
+
+    .step-card-desc {
+        font-size: 14px;
+        margin-bottom: 12px;
+    }
+
+    .step-card-level {
+        font-size: 12px;
+    }
+
+    .level-dot {
+        width: 10px;
+        height: 10px;
+    }
+
+    .step-action-btn {
+        padding: 10px 28px;
+        font-size: 14px;
+    }
 }

@@ -85,3 +85,147 @@
     width: auto;
     margin-bottom: 25px; /* 캐릭터 다리가 바닥에 자연스럽게 닿도록 아래 여백 주기 */
 }
+
+/* ===========================
+   Study.css — 갤럭시 S22 모바일 최적화
+   기준: 360px × 780px
+   =========================== */
+
+.study-container {
+    font-family: 'Pretendard', -apple-system, sans-serif;
+    background-color: #fcfcf9;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.study-main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 48px 16px;
+    padding-bottom: 80px;
+    box-sizing: border-box;
+}
+
+/* 타이틀: 32px → 20px으로 축소 */
+.study-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 28px;
+    text-align: center;
+    line-height: 1.4;
+    word-break: keep-all;
+}
+
+/* 카드 래퍼: 가로 나열 → 세로 스택 */
+.study-cards-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+    max-width: 328px; /* 360 - 좌우 padding 16px×2 */
+}
+
+/* 카드: 고정 396px → 100% 너비, 높이도 줄임 */
+.study-card {
+    width: 100%;
+    height: 220px;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    text-decoration: none;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.study-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
+}
+
+/* 카드 타이틀: 여백 줄임 */
+.study-card-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 24px;
+    margin-bottom: 12px;
+}
+
+/* 이미지 컨테이너 */
+.study-card-image {
+    width: 100%;
+    flex: 1;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+/* 바닥 이미지: 변경 없음 (이미 반응형) */
+.floor-img {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    z-index: 1;
+    display: block;
+}
+
+/* 캐릭터 이미지: max-height 줄여서 카드 안에 맞춤 */
+.character-img {
+    position: relative;
+    z-index: 2;
+    max-height: 130px; /* 200px → 130px */
+    width: auto;
+    margin-bottom: 20px;
+}
+
+
+/* ===========================
+   데스크탑 원본 레이아웃 복원
+   (768px 이상에서는 기존 디자인 유지)
+   =========================== */
+@media (min-width: 768px) {
+    .study-main-content {
+        padding: 20px;
+        padding-bottom: 80px;
+    }
+
+    .study-title {
+        font-size: 32px;
+        margin-bottom: 50px;
+        text-align: left;
+    }
+
+    .study-cards-wrapper {
+        flex-direction: row;
+        gap: 30px;
+        max-width: none;
+        width: auto;
+    }
+
+    .study-card {
+        width: 396px;
+        height: 320px;
+    }
+
+    .study-card-title {
+        font-size: 18px;
+        margin-top: 40px;
+        margin-bottom: 20px;
+    }
+
+    .character-img {
+        max-height: 200px;
+        margin-bottom: 25px;
+    }
+}
